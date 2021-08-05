@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+	<div>
+		<label> 사용자 : </label>
+		<a th:text="${member.name}"></a>
+	</div>
+
+	<button><a href="../boards/boards.html" style="text-decoration:none">게시판으로</a></button>
+	<button><a href="../../static/index.html" style="text-decoration:none"> 로그아웃 </a></button>
+
+</body>
+</html>

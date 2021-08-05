@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body style="text-align: center;">
+	<form th:action="@{/members/login}" th:object="${memberForm}" method="post">
+		<div>
+			<label>로그인 ID</label>
+			<input type="text" name="">
+
+		</div>
+		<div>
+			<label>비밀 번호</label>
+			<input type="text" name="">
+
+		</div>
+		<hr>
+
+		<div >
+			
+			<button onclick="location.href='loginMain.html'"
+					th:onclick="|location.href='@{/login/loginMain}'|"
+			type="submit">로그인</button>
+
+			<button 
+			onclick="location.href='login.html'" th:onclick="|location.href='@{/}'|"
+			type="button" th:text="#{button.cancel}">취소</button>
+
+		</div>
+
+	</form>
+
+</body>
+</html>

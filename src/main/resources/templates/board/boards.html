@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+	    <meta charset="utf-8">
+
+	<title></title>
+</head>
+<body>
+
+	<div style="max-width: 600px">
+		<div >
+			<h2 >Memo List</h2>
+		</div>
+
+		<div>
+				<button 
+				onclick="location.href='addBoard.html'"
+				th:onclick="|location.href='@{/board/new}'|"
+				type="button" >글쓰기</button>
+			</div>
+		</div>
+
+
+		<div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th >ID</th>
+						<th >제목</th>
+						<th >조회수</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="board : ${boards}">
+						<td>
+							<a  th:href="@{|/board/boards/${board.id}|}"  th:text="${board.id}">id</a>
+						</td>
+						<td>
+							<a  th:href="@{|/board/boards/${board.id}|}" th:text="${board.title}">title</a>
+						</td>
+						<td th:text="${board.visitcount}">10000</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</body>
+	</html>

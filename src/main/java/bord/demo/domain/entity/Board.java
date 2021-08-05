@@ -17,6 +17,8 @@ public class Board {
     private String title;
     private String context;
 
+    private Long visitcount; //조회수
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form th:action="@{/board/new}" th:object="${boardsForm}" method="post">
+
+    <div>
+        <label th:for="name">제목 :</label>
+        <input type="text" th:field="*{title}">
+        </div>
+    </div>
+
+        <div>
+            <label>내용 :</label>
+            <input type="text" th:field="*{context}">
+            </div>
+        </div>
+
+            <div>
+
+                <button onclick="location.href='../login/loginMain.html'"
+                        type="submit">등록</button>
+
+                <button
+                        onclick="location.href='../../static/index.html'"
+                        th:onclick="|location.href='@{/boards/boards}'|"
+                        th:text="#{button.cancel}"
+                        type="button">취소</button>
+
+            </div>
+</form>
+
+</body>
+</html>

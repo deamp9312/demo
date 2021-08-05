@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -45,6 +46,19 @@ public class MemberService {
     public List<Member> findMemberByName(String name){
         return memberRepository.findByName(name);
     }
+
+
+
+ /*   public static Member login(String name, String password){
+        List<Member> byName = memberRepository.findByName(name);
+        Member member = byName.get(0);
+        if(member.getPassword().equals(password)){
+            return member;
+        }else{
+            return null;
+        }
+
+    }*/
 
 
 

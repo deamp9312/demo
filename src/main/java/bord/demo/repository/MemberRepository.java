@@ -9,12 +9,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface MemberRepository  extends JpaRepository<Member,Long> {
 
     List<Member> findByName(String name);
-    Optional<Member> findOptionalByUsername(String name);
+    Optional<Member> findOptionalByName(String name);
+    Member findMemberByName(String name);
 
-    @Query("select m from Member m where m.name=name and m.password=:password")
-    public Optional<Member> userCheck(@Param("name")String name,@Param("password")String password);
+
+
+
 
 }

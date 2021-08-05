@@ -10,8 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -23,18 +26,19 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
+    //회원가입--
     @GetMapping("/members/new")
-    public String create(Model model){
+    public String create(@ModelAttribute("memberForm") MemberForm form) {
         log.info("getmapping/members/new");
 
-        model.addAttribute("memberForm", new MemberForm());
         return "members/createAccountForm";
     }
+
     @PostMapping("/members/new")
-    public String create(@Valid MemberForm form, BindingResult result){
+    public String create(@Valid MemberForm form, BindingResult result) {
         log.info("postmapping/members/new");
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "members/createAccountForm";
         }
 
@@ -48,31 +52,33 @@ public class MemberController {
         return "redirect:/";
 
     }
+//--
 
     @GetMapping("/members/login")
-    public String login(Model model){
+    public String login(@ModelAttribute("loginForm") LoginForm form) {
         log.info("getmapping/members/login");
-        model.addAttribute("loginForm", new MemberForm());
+
         return "login/logIn";
     }
-
-    @PostMapping("/members/login")
-    public String login(@Valid MemberForm form,BindingResult result){
-        if(result.hasErrors()){
+//로그인 검증 부분인데 수정중...
+   /* @PostMapping("/members/login")
+    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
+                        @RequestParam(defaultValue = "/")String redirectURL
+            , HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
+            log.info("loginerror");
             return "login/logIn";
         }
 
-        Optional<Member> beforeMember = memberRepository.userCheck(form.getName(), form.getPassword());
-        if(beforeMember!=null){
-            return
+
+
+        Member loginMember = MemberService.login(form.getName(), form.getPassword());
+        if (loginMember == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+            return "login/loginForm";
         }
 
-
-
-//고쳐야됨
-        return "ok";
-
-
-    }
+        return "redirect:"+redirectURL;
+    }*/
 
 }

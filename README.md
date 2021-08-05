@@ -1,5 +1,28 @@
 # demo
 
+---home.html
+![image](https://user-images.githubusercontent.com/71180644/128313294-1a9ae800-bb75-47ad-9189-6ede3d5aaac4.png)
+
+---createAccountForm.html
+![image](https://user-images.githubusercontent.com/71180644/128313233-ca27148e-9117-4cf4-a430-4cc7512d012f.png)
+
+---정상적으로 data 들어옴
+![image](https://user-images.githubusercontent.com/71180644/128313545-cab07c76-e97a-4c65-98db-ccf421b7e850.png)
+
+---로그인 페이지
+![image](https://user-images.githubusercontent.com/71180644/128313627-eff3a6df-7e04-4383-86a9-9535eaae33df.png)
+
+---메모장 메인 페이지
+![image](https://user-images.githubusercontent.com/71180644/128313711-842e22f1-4ff8-4462-8874-f6ed2e88618d.png)
+
+---글 쓰기 
+![image](https://user-images.githubusercontent.com/71180644/128313795-205b1c97-1e41-45cf-8709-3b46dad382ea.png)
+---글 로딩 된거 확인
+![image](https://user-images.githubusercontent.com/71180644/128313853-fbaf6fe1-68c7-4864-9447-baacae9bbf1d.png)
+
+
+
+
 
 spring boot mvc패턴을 적용한 간단한 로그인& 로그인시 메모장기능을 이용할수 있게 만들고 있습니다
 

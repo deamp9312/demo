@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@Controllergit@github.com
 @RequiredArgsConstructor
 @Slf4j
 public class BoardController {

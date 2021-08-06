@@ -48,9 +48,8 @@ public class MemberService {
     }
 
 
-
- /*   public static Member login(String name, String password){
-        List<Member> byName = memberRepository.findByName(name);
+    public Member login(String Name,String password){
+        List<Member> byName = memberRepository.findByName(Name);
         Member member = byName.get(0);
         if(member.getPassword().equals(password)){
             return member;
@@ -58,8 +57,7 @@ public class MemberService {
             return null;
         }
 
-    }*/
-
+    }
 
 
 

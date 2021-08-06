@@ -11,12 +11,14 @@
     <div>
         <label th:for="name">제목 :</label>
         <input type="text" th:field="*{title}">
+        <div class="field-error" th:errors="*{title}">
         </div>
     </div>
 
         <div>
             <label>내용 :</label>
             <input type="text" th:field="*{context}">
+
             </div>
         </div>
 
@@ -27,7 +29,7 @@
 
                 <button
                         onclick="location.href='../../static/index.html'"
-                        th:onclick="|location.href='@{/boards/boards}'|"
+                        th:onclick="|location.href='@{/board/boards}'|"
                         th:text="#{button.cancel}"
                         type="button">취소</button>
 

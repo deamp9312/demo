@@ -6,7 +6,11 @@
 
 </head>
 <body>
-<button><a href="/login/logIn.html" th:href="@{/members/login}">로그인</a></button>
+<button
+        onclick="location.href='login.html'"
+        th:onclick="|location.href='@{/login}'|" type="button">
+  로그인
+</button>
 <button><a href="/members/createAccountForm.html" th:href="@{/members/new}"> 회원 가입 </a></button>
 </body>
 </html>

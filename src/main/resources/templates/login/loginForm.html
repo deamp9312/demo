@@ -7,15 +7,15 @@
 
 </head>
 <body style="text-align: center;">
-	<form th:action="@{/members/login}" th:object="${memberForm}" method="post">
+	<form th:action th:object="${loginForm}" method="post">
 		<div>
 			<label>로그인 ID</label>
-			<input type="text" name="">
+			<input type="text" name="" th:field="*{name}">
 
 		</div>
 		<div>
 			<label>비밀 번호</label>
-			<input type="text" name="">
+			<input type="text" name="" th:field="*{password}">
 
 		</div>
 		<hr>

@@ -2,6 +2,7 @@ package bord.demo.controller;
 
 import bord.demo.domain.entity.Board;
 import bord.demo.domain.entity.Member;
+import bord.demo.repository.BoardJpaRepository;
 import bord.demo.repository.BoardRepository;
 import bord.demo.service.BoardSerivce;
 import lombok.RequiredArgsConstructor;
@@ -27,25 +28,15 @@ public class BoardController {
 
     private final BoardSerivce boardSerivce;
 
+    private final BoardJpaRepository boardJpaRepository;
+
 
     @GetMapping("/board/boards")
     public String boards(Model model){
         List<Board> boards = boardRepository.findAll();
+
         model.addAttribute("boards", boards);
         return "board/boards";
-    }
-
-
-    @GetMapping("/board/{boardId}")
-    public String item(@PathVariable long boardId, Model model) {
-        log.info("getmapping/board/{itemId}");
-
-        Optional<Board> boards = boardRepository.findById(boardId);
-       /* Long visitcount = boards.get().getVisitcount();
-        visitcount++;
-        boards.get().setVisitcount(visitcount);*/
-        model.addAttribute("boards", boards);
-        return "boards/boards";
     }
 
 
@@ -62,11 +53,10 @@ public class BoardController {
         log.info("postmapping/board/new");
 
         if (result.hasErrors()) {
-            return "boards/addBoard";
+            return "board/addBoard";
         }
-        Board board = new Board();
-        board.setTitle(form.getTitle());
-        board.setContext(form.getContext());
+
+        Board board = new Board(form.getTitle(), form.getContext());
 
         boardRepository.save(board);
 
@@ -76,7 +66,27 @@ public class BoardController {
         return "redirect:/board/boards";
 
     }
-    //수정
+
+
+    //번호 맵핑
+    @GetMapping("/board/boards/{boardId}")
+    public String item(@PathVariable long boardId, Model model) {
+        log.info("getmapping/board/{itemId}");
+
+        Optional<Board> boards = boardRepository.findById(boardId);
+        Long visitcount = boards.get().getVisitcount();
+        if(visitcount!=null) {
+            visitcount++;
+        }else {
+            visitcount=1L;
+        }
+
+        boards.get().setVisitcount(visitcount);
+        model.addAttribute("boards", boards);
+        return "board/boards";
+    }
+
+
 
 
     //사전 데이터

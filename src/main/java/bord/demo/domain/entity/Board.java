@@ -23,7 +23,7 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    public Board() {
+    protected Board() {
     }
 
     public Board(String textname, String context) {

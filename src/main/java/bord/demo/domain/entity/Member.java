@@ -30,7 +30,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new LinkedList<>();
 
-    public Member() {
+    protected Member() {
     }
 
     public Member(String name, String password ) {

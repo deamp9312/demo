@@ -7,17 +7,15 @@ import bord.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -42,9 +40,7 @@ public class MemberController {
             return "members/createAccountForm";
         }
 
-        Member member = new Member();
-        member.setName(form.getName());
-        member.setPassword(form.getPassword());
+        Member member = new Member(form.getName(),form.getPassword());
         memberService.join(member);
         log.info(member.getName());
         log.info(member.getPassword());
@@ -54,31 +50,43 @@ public class MemberController {
     }
 //--
 
-    @GetMapping("/members/login")
+
+    //로그인
+    @GetMapping("/login")
     public String login(@ModelAttribute("loginForm") LoginForm form) {
         log.info("getmapping/members/login");
 
-        return "login/logIn";
+        return "login/loginForm";
     }
-//로그인 검증 부분인데 수정중...
-   /* @PostMapping("/members/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
-                        @RequestParam(defaultValue = "/")String redirectURL
-            , HttpServletRequest request) {
+
+    @PostMapping("/login")
+    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
-            log.info("loginerror");
-            return "login/logIn";
+            return "login/loginForm";
         }
 
-
-
-        Member loginMember = MemberService.login(form.getName(), form.getPassword());
+        Member loginMember = memberService.login(form.getName(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
         }
 
-        return "redirect:"+redirectURL;
+
+ /*       Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+        response.addCookie(idCookie);*/
+
+        return "redirect:/login/loginMain";
+    }
+
+    @GetMapping("/login/loginMain")
+    public String loginHome(){
+        return "/login/loginMain";
+    }
+/*
+    @GetMapping("/boards/boards")
+    public String gotoBoards(){
+        return "/boards/boards";
     }*/
+
 
 }

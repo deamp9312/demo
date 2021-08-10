@@ -2,7 +2,6 @@ package bord.demo.service;
 
 
 import bord.demo.domain.entity.Board;
-import bord.demo.domain.entity.Member;
 import bord.demo.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,6 @@ public class BoardSerivce {
 
         return board.getId();
     }
-
-
 
 
 }

@@ -26,8 +26,14 @@ public class Board {
     protected Board() {
     }
 
-    public Board(String textname, String context) {
+    public Board(String textname, String context, Long visitcount) {
         this.title = textname;
+        this.context = context;
+        this.visitcount = visitcount;
+    }
+
+    public Board(String title, String context) {
+        this.title = title;
         this.context = context;
     }
 }

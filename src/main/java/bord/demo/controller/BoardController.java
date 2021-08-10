@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Controllergit@github.com
+
+@Controller
 @RequiredArgsConstructor
 @Slf4j
 public class BoardController {
@@ -31,11 +33,12 @@ public class BoardController {
     private final BoardJpaRepository boardJpaRepository;
 
 
+
     @GetMapping("/board/boards")
     public String boards(Model model){
-        List<Board> boards = boardRepository.findAll();
+        List<Board> board = boardRepository.findAll();
 
-        model.addAttribute("boards", boards);
+        model.addAttribute("board", board);
         return "board/boards";
     }
 
@@ -68,23 +71,58 @@ public class BoardController {
     }
 
 
-    //번호 맵핑
-    @GetMapping("/board/boards/{boardId}")
-    public String item(@PathVariable long boardId, Model model) {
-        log.info("getmapping/board/{itemId}");
 
-        Optional<Board> boards = boardRepository.findById(boardId);
-        Long visitcount = boards.get().getVisitcount();
+
+
+    //번호 맵핑 아직 구현 안됨
+    @GetMapping("/board/boardnum/{boardId}")
+    public String item(@PathVariable long boardId, Model model) {
+        log.info("getmapping/board/boardnum/{itemId}");
+
+        List<Board> board = boardRepository.findAllById(Collections.singleton(boardId));
+/*        Long visitcount = boards.get(0).getVisitcount();
         if(visitcount!=null) {
             visitcount++;
         }else {
             visitcount=1L;
         }
+        boards.get(0).setVisitcount(visitcount);*/
 
-        boards.get().setVisitcount(visitcount);
-        model.addAttribute("boards", boards);
-        return "board/boards";
+        model.addAttribute("board", board);
+
+        return "board/boardnum";
     }
+
+//수정기능
+    @GetMapping("/board/boardnum/{boardId}/edit")
+    public String editForm(@PathVariable Long boardId,Model model){
+        Optional<Board> board = boardRepository.findById(boardId);
+        model.addAttribute("board", board);
+        return "board/editBoard";
+
+    }
+
+    @PostMapping("/board/boardnum/{boardId}/edit")
+    public String edit(@PathVariable Long boardId, Model model) {
+//        @ModelAttribute(name = "board") Board board
+//        boardJpaRepository.update(boardId, board);
+
+        Optional<Board> board = boardRepository.findById(boardId);
+//        Board boards = boardRepository.save(board);
+
+
+        model.addAttribute("board", board);
+
+
+
+        log.info(board.get().getTitle());
+        log.info(board.get().getContext());
+//        return "redirect: /board/boards";
+//        return "board/boards/1";
+        return "login/loginMain";
+    }
+
+
 
 
 
@@ -93,8 +131,8 @@ public class BoardController {
     @PostConstruct
     public void init() {
 
-        boardRepository.save(new Board("Atitle", "aaaa"));
-        boardRepository.save(new Board("Btitle", "bbbb"));
+        boardRepository.save(new Board("Atitle", "aaaa" ,0L));
+        boardRepository.save(new Board("Btitle", "bbbb",0L));
     }
 
 

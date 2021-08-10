@@ -23,24 +23,26 @@
 
 
 		<div>
-			<table class="table">
+			<table class="table" border="1">
 				<thead>
 					<tr>
 						<th >ID</th>
 						<th >제목</th>
+						<th >내용</th>
 						<th >조회수</th>
 
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="board : ${boards}">
+					<tr th:each="boards : ${board}">
 						<td>
-							<a  th:href="@{|/board/boards/${board.id}|}"  th:text="${board.id}">id</a>
+							<a   th:href="@{|/board/boardnum/${boards.id}|}"  th:text="${boards.id}" >id</a>
 						</td>
 						<td>
-							<a  th:href="@{|/board/boards/${board.id}|}" th:text="${board.title}">title</a>
+							<a  th:href="@{|/board/boardnum/${boards.id}|}" th:text="${boards.title}">title</a>
 						</td>
-						<td th:text="${board.visitcount}">10000</td>
+						<td th:text="${boards.context}">내용</td>
+						<td th:text="${boards.visitcount}">0</td>
 					</tr>
 				</tbody>
 			</table>
